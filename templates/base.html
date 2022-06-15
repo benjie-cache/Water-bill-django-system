@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   
+  
+<head>
+  {%load static%}  
+ 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WATER BILL SYSTEM</title>
+
+     <!-- Favicons -->
+ <link href="{% static '\img\icons8-calculator-100.png' %}" rel="icon"> 
+    <link href="{% static '\img\8-water-drops-png-image-thumb.png' %}" rel="apple-touch-icon"> 
+
+      <!-- Vendor CSS Files -->
+  <link href="{% static '\vendor\bootstrap\css\bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\bootstrap-icons\bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\boxicons\css\boxicons.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\quill\quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\quill\quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\remixicon\remixicon.css' %}" rel="stylesheet">
+  <link href="{% static '\vendor\simple-datatables\style.css' %}" rel="stylesheet">
+
+
+      <!-- Template Main CSS File -->
+  <link href="{%   static '\css\style.css' %}" rel="stylesheet"> 
+  <style>
+    /*customize the add btn*/
+  #addtenant{
+    color: #012970;
+    
+  }
+  #addtenant #addtenant-link{
+    display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #012970;
+  transition: 0.3;
+  background: #f6f9ff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  }
+  #addtenant #addtenant-link i{
+    font-size: 25px;
+  margin-right: 10px;
+  color: #012970;
+  }
+  #addtenant  :hover{
+  color: #4154f1;
+  background: #f6f9ff;
+  }
+/*-customize  forms-->*/
+
+    #submit-btns #btn1 {
+               background:#012970;
+       }
+    .form-floating #floatingName{
+          border: none;
+          border-bottom: 2px solid navy;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+{%block content%}
+<!--everything  goes here-->
+
+{%endblock content%}
+</body>
+<!-- Javascript files -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<!-- Always remember to call the above files first before calling the bootstrap.min.js file -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script src="{% static '\vendor\tinymce\tinymce.min.js' %}"></script>
+
+<script src="{% static '\vendor\quill\quill.min.js' %}"></script>
+  
+  <script src="{% static '\vendor\simple-datatables\simple-datatables.js' %}"></script>
+  
+  
+ 
+  <!-- Template Main JS File -->
+  <script src="{% static '\js\main.js'%}"></script>
+
+
+</body>
+</html>
+<!---->
