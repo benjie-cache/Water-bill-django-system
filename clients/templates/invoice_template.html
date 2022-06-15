@@ -1,0 +1,487 @@
+{% extends 'base.html' %}
+{%block content%}
+{% block extra_css %}
+{%load static%}
+<style type="text/css">
+    body{margin-top:0px;
+        background-color: #f7f7ff;
+        }
+        #invoice {
+            padding: 0px;
+        }
+        
+        .invoice {
+            position: relative;
+            background-color: #FFF;
+            min-height: 680px;
+            padding: 15px
+        }
+        
+        .invoice header {
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #0d6efd
+        }
+        
+        .invoice .company-details {
+            text-align: center
+        }
+        
+        .invoice .company-details .name {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight:bolder;
+            
+        }
+        .invoice .company-details .name a{
+            color:black;
+
+        }
+        
+        .invoice .contacts {
+            margin-bottom: 20px
+        }
+        
+        .invoice .invoice-to {
+            text-align: left
+        }
+        
+        .invoice .invoice-to .to {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+        
+        .invoice .invoice-details {
+            text-align: left;
+            font-weight:bolder;
+            
+        }
+        
+        .invoice .invoice-details .invoice-id {
+            margin-top: 0;
+            color: #0d6efd
+        }
+        
+        .invoice main {
+            padding-bottom: 50px
+        }
+        
+        
+        
+        .invoice main .notices {
+            padding-left: 6px;
+            border-left: 6px solid #0d6efd;
+            background: #e7f2ff;
+            padding: 10px;
+        }
+        
+        .invoice main .notices .notice {
+            font-size: 1.2em
+        }
+        
+        .invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px
+        }
+        .invoice table #payments-table{
+            padding: 20px;
+            background: #eee;
+            border-bottom: 1px solid #fff
+
+        }
+        .invoice table td,
+        .invoice table th {
+            padding: 0px;
+            background: #eee;
+            border-bottom: 1px solid #fff
+        }
+        
+        .invoice table th {
+            white-space: nowrap;
+            font-weight: 400;
+            font-size: 10px
+        }
+        
+        .invoice table td h3 {
+            margin: 0;
+            font-weight: 400;
+            color: #0d6efd;
+            font-size: 1.2em
+        }
+        
+        .invoice table .qty,
+        .invoice table .total,
+        .invoice table .unit {
+            text-align: right;
+            font-size: 1.2em
+        }
+        
+        .invoice table .no {
+            color: #fff;
+            font-size: 1.6em;
+            background: #0d6efd
+        }
+        
+        .invoice table .unit {
+            background: #ddd
+        }
+        
+        .invoice table .total {
+            background: #0d6efd;
+            color: #fff
+        }
+        
+        .invoice table tbody tr:last-child td {
+            border: none
+        }
+        
+        .invoice table tfoot td {
+            background: 0 0;
+            border-bottom: none;
+            white-space: nowrap;
+            text-align: right;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-top: 1px solid #aaa
+        }
+        
+        .invoice table tfoot tr:first-child td {
+            border-top: none
+        }
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+        }
+        
+        .invoice table tfoot tr:last-child td {
+            color: #0d6efd;
+            font-size: 1.4em;
+            border-top: 1px solid #0d6efd
+        }
+        
+        .invoice table tfoot tr td:first-child {
+            border: none
+        }
+        
+        .invoice footer {
+            width: 100%;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #aaa;
+            padding: 8px 0
+        }
+        
+        @media print {
+            .invoice {
+                font-size: 11px !important;
+                overflow: hidden !important
+            }
+            .invoice footer {
+                position: absolute;
+                bottom: 10px;
+                page-break-after: always
+            }
+            .invoice>div:last-child {
+                page-break-before: always
+            }
+        }
+        
+        .invoice main .notices {
+            padding-left: 6px;
+            border-left: 6px solid #0d6efd;
+            background: #e7f2ff;
+            padding: 10px;
+        }
+        #title{
+            font-weight:bolder;
+            text-align:center;
+        }
+        #title1{
+            background:skyblue;
+        }
+        #title2{
+            background:green;
+        }
+        #dropdownMenuButton{
+            background:white;
+            border:none;
+            color:black;
+            outline:none;
+        }
+        #dropdownMenuButton::active{
+            border:none;
+            outline:none;
+        }
+        @media print
+        {
+        body * { visibility: hidden; 
+           margin:0;
+         
+            
+        }
+        .div2 * { visibility: visible;
+            
+            font-weight:bolder;
+            margin:0;
+            
+         }
+         
+
+       }
+        }
+        
+</style>
+{% endblock %}
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url  'home' %}">Customer list</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+    </ol>
+  </nav>
+  
+  
+<div class="container div2">
+    <div class="card">
+        <div class="card-body">
+            <div id="invoice">
+               
+                <div class="invoice overflow-auto">
+                    <div style="min-width: 600px">
+                        <header>
+                            <div class="row">
+                               
+                                <div class="col company-details">
+                                    <h5 class="name">
+                                        <a target="_blank" href="javascript:;">
+									NICOTED ENTERPRISES WATER SYSTEM<br>
+                                    &nbsp;&nbsp;PAYMENT RECEIPT/INVOICE
+									</a>
+                                    </h5>
+                                    
+                                    
+                                </div>
+                               
+                            </div>
+                        </header>
+                        <main>
+                            <div class="row contacts">
+                                
+                                     <div class="col-md-6 invoice-details">
+                                        <table class="table-bordered">
+                                        <tr>
+                                            <td style="background:orange">Invoice No:</td>
+                                            <td>{{customer_billing.bill_code}}</td>
+ 
+                                        </tr>
+                                        <tr>
+                                         <td style="background:orange">Invoice Date</td>
+                                         <td>{{today_date}}</td>
+                                     
+                                        </tr>
+                                        <tr>
+                                         <td  style="background:orange">Period</td>
+                                         <td>{{customer_billing.from_date}}-{{customer_billing.to_date}}</td>
+                                        </tr>
+                                        <tr>
+                                         <td style="background:orange">Days Due</td>
+                                         <td>{{customer_billing.days_due}}</td>
+ 
+                                        </tr>
+                                        <tr>
+                                            <td style="background:orange">Due Date</td>
+                                            <td>{{customer_billing.due_date}}</td>
+    
+                                           </tr>
+                                          
+                                       
+ 
+                                         </table>
+                                  
+                                    
+                                    </div>
+                                
+                                    <div class="col-md-6 invoice-to">
+
+                                   <table class="table-bordered">
+                                       <tr>
+                                           <td>Customer No:</td>
+                                           <td>{{customer_details.id}}</td>
+
+                                       </tr>
+                                       <tr>
+                                        <td>Name</td>
+                                        <td>
+                                            <div class="dropdown">
+                                            <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             {{customer_details.full_name}}
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {%for client in clients%}
+                                              <a class="dropdown-item" href="{% url 'invoice' client.id %}">{{client.full_name}}</a>
+                                              {%endfor%}
+                                            </div>
+                                          </div><td>
+                                        {% comment %} <td>Name</td>
+                                        <td>{{customer_details.full_name}}</td> {% endcomment %}
+                                    
+                                       </tr>
+                                       <tr>
+                                        <td>Address</td>
+                                        <td>{{customer_details.address_line}}</td>
+                                       </tr>
+                                       <tr>
+                                        <td>Meter No:</td>
+                                        <td>10570</td>
+
+                                       </tr>
+                                       <tr>
+                                        <td>Mobile No:</td>
+                                        <td>{{customer_details.active_phone_number}}</td>
+                                       </tr>
+
+                                   </table>
+                                  
+                            
+                                </div> 
+
+                               
+                            </div>
+
+                            <div id="title1" class="row"><h3 id="title">WATER BILLING DETAILS</h3></div>
+                            <table  class="table  table-bordered table-sm table-editable">
+                                <thead >
+                                    <tr>
+                                        <th style="background:orange">Period</th>
+                                        <th style="background:orange" >Due <br>Date</th>
+                                        <th style="background:orange" >Present <br>Reading</th>
+                                        <th style="background:orange" >Previous <br> Reading</th>
+                                        <th style="background:orange" >Consumption<br>(Units)</th>
+                                        <th style="background:orange" >Standing <br>Charge</th>
+                                        <th style="background:orange"  >Unit <br>Price</th>
+                                        <th style="background:orange" >Amount</th>
+                                        <th style="background:orange" >Balance <br>Forwarded</th>
+                                        <th style="background:orange" >Total <br> Bill</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{customer_billing.from_date}}-<br>{{customer_billing.to_date}}</td>
+                                        <td >
+                                            {{customer_billing.due_date}}
+                                           </td>
+                                        <td>62</td>
+                                        <td >61</td>
+                                        <td >{{customer_billing.units}}</td>
+                                        <td >100</td>
+                                        <td >145</td>
+                                        <td >{{customer_billing.total}}</td>
+                                        <td >515</td>
+                                        <td>760</td>
+                                    </tr>
+                                   <tr>
+                                   
+
+                                   </tr>
+                                </tbody>
+                              
+                            </table>
+                            <div id="title2" class="row"><h3 id="title">PAYMENT DETAILS</h3></div>
+                            <table id="payments-table"  class="table table-bordered  table-sm table-editable bg-light">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th  colspan=8 ></th>
+                                        <th  colspan=3 >Transaction Date</th>
+                                        <th colspan=3 >Mode Of Payment</th>
+                                       
+                                        <th colspan=3 >Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan=8 rowspan=3 ><img src="{% static "\img\note3.jpg"%}"></td> 
+                                    
+                                      <td colspan=3 ></td> 
+                                       <td colspan=3 >Bank Transfer</td>
+                                       <td colspan=3 ></td> 
+                                      
+                                      
+                                    </tr>
+                                    <tr>
+                                        
+                                      
+                                      <td colspan=3 ></td> 
+                                       <td colspan=3 >mpesa</td>
+                                       <td colspan=3 ></td> 
+                                     </tr>
+                                     <tr>
+                                        
+                                       
+                                        <td colspan=3 ></td> 
+                                         <td colspan=3 >cash</td>
+                                         <td colspan=3 ></td> 
+                                     </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="12" rowspan="3"></td>
+                                        
+                                        <td colspan="2">SUBTOTAL</td>
+                                        <td>760</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td colspan="2">payment</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td colspan="2">GRAND TOTAL</td>
+                                        <td>760</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <div class="thanks">Thank you for settling your bill promptly</div>
+                            <div class="notices">
+                                <div>Terms and Conditions</div>
+                                <div class="notice">
+                                    All paymnets shall be made through Mpesa Mobile. No.0712885787 or through any bank transfer to the same No. 									
+                                    All bills should be settled before the 7th of each month.Late payments shall automatically atract a penalty of 3%  of the unsettled bill.A 									
+                                    reconnection Fee of kshs. 500 is payable before reconnection.<br>								
+                                                                        
+                              
+                                    
+                                    
+                                    Prepared by:Dennis Kipserem --------------------------------------------------	<br><br>								
+                                                                        
+                                    Date                             :------------------------------------------------------------									
+                                    </div>
+                            </div>
+                        </main>
+                       
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+{%endblock content%}
+<script src="{% static '\js\popper.min.js' %}"></script>

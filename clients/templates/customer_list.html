@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{%block content%}
+
+<main id="main" class="main">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active"><a href="{% url  'home' %}">Customer list</a></li>
+      <li class="breadcrumb-item " aria-current="page"><a href="{% url  'invoice' 1%}">Invoices</a></li>
+      <li class="breadcrumb-item active"><a href="{% url  'home' %}">Payments</a></li>
+      
+    </ol>
+  </nav>
+    <div class="row">
+    
+    <div id="addtenant" class="col-4">
+      <a id="addtenant-link"  href="{% url 'add-customer'%}">
+        <i class="bi bi-person-plus"></i><span>Add Customer</span>
+      </a>
+    </div>
+  </div>
+<section class="section dashboard">
+      
+     
+
+        
+<div class="container-fluid" style="background-color:black">
+
+</div>       
+<div class="row"> 
+     
+<div class=" col-12 col-xs-12">
+        <div class="card recent-sales">
+  
+                <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                      <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                      </li>
+  
+                      <li><a class="dropdown-item" href="#">Today</a></li>
+                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                    </ul>
+                </div>
+  
+                <div class="card-body">
+                    <h5 class="card-title">Customer List<span>| Today</span></h5>
+  
+                    <table id="tenantlist" class="table datatable table-border table-sm table-editable" cellspacing="0"
+                    width="100% ">
+                      <thead>
+                        <tr>
+                         
+                          <th scope="col">NAME</th>
+                          <th scope="col">PHONE</th>
+                          <th scope="col">METRE NO </th>
+                          
+                          <th scope="col">ADDRESS</th>
+                          <th scope="col">EDIT</th>
+                          <th scope="col">DELETE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {%for customer in customers%}
+                        <tr>
+                         
+                          <td><a href="{% url 'invoice' customer.id %}" class="text-primary">{{customer.full_name}}</a></td>
+                          <td>{{customer.active_phone_number}}</td>
+                          <td  contenteditable='true'>{{customer.metre_number}}</td>
+
+                          <td>{{customer.address_line}}</td>
+
+                         
+                          
+                          <td><a   href="{% url  'edit-customer' customer.slug %}"> <i class="bi bi-pencil-square"></i></a></td>
+                          <td><a  href="{% url  'delete-customer' customer.slug %}"> <i class="bi bi-trash"></i></a></td>
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+  
+            
+  
+                </div>
+             
+
+         
+               
+        </div><!-- End recent sales --> 
+</div> 
+
+</div>      
+
+
+     
+ 
+    
+    </div>    
+</section>
+</main><!-- End #main -->
+  
+{%endblock content%}
